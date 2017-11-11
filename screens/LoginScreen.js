@@ -12,6 +12,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import LoginFB from '../screens/LoginFB';
+import { StackNavigator } from 'react-navigation';
 class LoginScreen extends Component {
 	constructor(props) {
  

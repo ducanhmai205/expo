@@ -11,7 +11,7 @@ import {
   Text,
   Alert
 } from 'react-native';
-
+import { LinearGradient } from 'expo';
 import RadioButton from 'radio-button-react-native';
 import LoginFB from '../screens/LoginFB';
 class RegisterScreen extends Component {
@@ -137,7 +137,17 @@ fetch('http://192.168.1.99/KhoahocAPI/user_registration.php', {
 
 			<View style={styles.registerButton}>
 				<TouchableOpacity style={{flex: 1,}} onPress={this.UserRegistrationFunction}>
-
+						<LinearGradient
+                       colors={['#54DAC5','#91FFA0']}
+                       
+                        start={{x: 0.0, y: 0}}
+                        end={{x: 1.6, y: 0}}
+                       style={{ flex:1, alignItems: 'center', justifyContent: 'center', borderRadius: 40 }}
+                     >
+                       <Text style={{ fontWeight: 'bold',color: '#fff', backgroundColor: 'transparent' }}>
+                       REGISTER
+                       </Text>
+                       </LinearGradient>
 				</TouchableOpacity>
 
 			</View>	 
@@ -218,8 +228,11 @@ paddingLeft: 10
 },
 registerButton:{
 	flex: 0.7,
-	
-	
+	borderWidth: 2,
+     borderColor:'white',
+     borderBottomLeftRadius: 30, borderBottomRightRadius: 30,
+     borderTopLeftRadius: 40, borderTopRightRadius: 40,
+	paddingTop: 3
 },
 loginButton:{
 	flex: 1.4,

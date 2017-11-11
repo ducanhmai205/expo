@@ -7,34 +7,61 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity
-} from 'react-native';
+  TouchableOpacity,
 
+} from 'react-native';
+import { LinearGradient } from 'expo';
 class TopScreen extends Component {
   render() {
-  	    const { navigate } = this.props.navigation;
+        const { navigate } = this.props.navigation;
+        const Backgrounds = {
+   				Login: require('../img/top3.png')
+};
     return (
       <View style={styles.container}>
-      	<Image  source={require('../img/top.png')} style={styles.backgroundImage}>
-      		<View style={styles.login}>
-			</View>
+        <Image  source={Backgrounds.Login} style={styles.backgroundImage}>
+            	<View style={styles.wrapButton}>
+            			<View style={styles.loginButton}>
+            				<TouchableOpacity onPress={ ()=> {navigate('LoginScreen')}} style={{flex: 1,}}>
+                      
+                     <LinearGradient
+                       colors={['#BDFFF3','#4AC29A',]}
+                       
+                        start={{x: 0.0, y: 0}}
+                        end={{x: 1.6, y: 0}}
+                       style={{ flex:1, alignItems: 'center', justifyContent: 'center', borderRadius: 30 }}
+                     >
+                       <Text style={{ fontWeight: 'bold',color: '#fff', backgroundColor: 'transparent' }}>
+                       L O G I N
+                       </Text>
+              
+                   </LinearGradient>
+            		</TouchableOpacity>
 
-			<View style={styles.button}>
-			   <View style={styles.buttonLogin}>
-			   		<TouchableOpacity onPress={ ()=> {navigate('LoginScreen')}}>
-			   			<Image  source={require('../img/loginbutton.png')} style={styles.loginbutton}></Image>
-			   		</TouchableOpacity>
-			   		 </View>
-			   		<View style={styles.buttonRegister}>
-			   		<TouchableOpacity onPress={ ()=> {navigate('RegisterScreen') }}>
-			   			<Image  source={require('../img/buttontop.png')} style={styles.buttonregister}></Image>
-			   		</TouchableOpacity>
-			   		</View>
-			   		 
-					
-			  
-		   </View>
-      	</Image>
+            			</View>
+
+				     	<View style={styles.registerButton}>
+				     		<TouchableOpacity onPress={ ()=> {navigate('RegisterScreen')}} style={{flex: 1,}}>
+                      
+                            	<LinearGradient
+                            	  colors={['#ffffff','#ffffff',]}
+                       
+                            	   start={{x: 0.0, y: 0}}
+                            	   end={{x: 1.6, y: 0}}
+                            	  style={{ flex:1, alignItems: 'center', justifyContent: 'center', borderRadius: 30 }}
+                            	>
+                            	  <Text style={{ fontWeight: 'bold',color: '#52D8C4', backgroundColor: 'transparent' }}>
+                            	  Register
+                            	  </Text>
+              
+                   </LinearGradient>
+            		</TouchableOpacity>
+
+            	     	</View>
+            	</View>
+
+
+        </Image>
        </View>
     );
   }
@@ -42,56 +69,46 @@ class TopScreen extends Component {
 
 const styles = StyleSheet.create({
 container:{
-	flex: 1,
+  flex: 1,
 },
 backgroundImage:{
-	flex: 1,
+  flex: 1,
+  flexDirection: 'column-reverse' ,
     width: null,
     height: null,
 },
-login:{
-	flex: 1,
+wrapButton:{
+	flex: 0.3,
+	marginHorizontal: 93,
+	marginTop: 90,
+	marginBottom: 100,
 	
 },
-
-button:{
+loginButton:{
 	flex: 1,
+
+	marginBottom: 15,
+	marginTop: 20,
 	
-
-
+     borderWidth: 2,
+     borderColor:'white',
+     borderBottomLeftRadius: 30, borderBottomRightRadius: 30,
+     borderTopLeftRadius: 30, borderTopRightRadius: 30,
+  
 },
-loginbutton:{
-		
-	  flex: 1,
-	 
-	 resizeMode:'contain',
+registerButton:{
+	flex: 1,
 
-	 
+	marginBottom: 15,
 	
-},
-buttonregister:{
-	resizeMode:'contain',
-
-	 flex: 1,
-
-},
-buttonLogin:{
-	flex: 1,
-	backgroundColor: 'green',
-	alignItems: 'center',
-	 justifyContent: 'center',
-	 marginTop: 105,
-	 paddingTop: 14
-},
-buttonRegister:{
-	flex: 1,
-	alignItems: 'center',
-	backgroundColor: 'yellow',
-	marginBottom: 120,
-	paddingBottom: 35,
-	paddingLeft:3
-
+	
+     borderWidth: 2,
+     borderColor:'#52D8C4',
+     borderBottomLeftRadius: 30, borderBottomRightRadius: 30,
+      borderTopLeftRadius: 30, borderTopRightRadius: 30,
+   
 }
+
 
 });
 
