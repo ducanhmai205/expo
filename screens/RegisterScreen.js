@@ -40,7 +40,7 @@ UserRegistrationFunction = () =>{
  
  
  
-fetch('http://192.168.1.99/KhoahocAPI/user_registration.php', {
+fetch('http://192.168.1.56/KhoahocAPI/user_registration.php', {
   method: 'POST',
   headers: {
     'Accept': 'application/json',
@@ -71,7 +71,7 @@ fetch('http://192.168.1.99/KhoahocAPI/user_registration.php', {
   render() {
     return (
       <View style={styles.container}>
-      	<Image  source={require('../img/register.png')} style={styles.backgroundImage}>
+      	<Image  source={require('../img/registerscreen.png')} style={styles.backgroundImage}>
       	 <View style={styles.wrap}>
       		<View style={styles.text}>
 

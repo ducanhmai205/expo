@@ -15,14 +15,14 @@ class TopScreen extends Component {
   render() {
         const { navigate } = this.props.navigation;
         const Backgrounds = {
-   				Login: require('../img/top3.png')
+          Login: require('../img/topscreen.png')
 };
     return (
       <View style={styles.container}>
         <Image  source={Backgrounds.Login} style={styles.backgroundImage}>
-            	<View style={styles.wrapButton}>
-            			<View style={styles.loginButton}>
-            				<TouchableOpacity onPress={ ()=> {navigate('LoginScreen')}} style={{flex: 1,}}>
+              <View style={styles.wrapButton}>
+                  <View style={styles.loginButton}>
+                    <TouchableOpacity onPress={ ()=> {navigate('LoginScreen')}} style={{flex: 1,}}>
                       
                      <LinearGradient
                        colors={['#BDFFF3','#4AC29A',]}
@@ -36,29 +36,29 @@ class TopScreen extends Component {
                        </Text>
               
                    </LinearGradient>
-            		</TouchableOpacity>
+                </TouchableOpacity>
 
-            			</View>
+                  </View>
 
-				     	<View style={styles.registerButton}>
-				     		<TouchableOpacity onPress={ ()=> {navigate('RegisterScreen')}} style={{flex: 1,}}>
+              <View style={styles.registerButton}>
+                <TouchableOpacity onPress={ ()=> {navigate('RegisterScreen')}} style={{flex: 1,}}>
                       
-                            	<LinearGradient
-                            	  colors={['#ffffff','#ffffff',]}
+                              <LinearGradient
+                                colors={['#ffffff','#ffffff',]}
                        
-                            	   start={{x: 0.0, y: 0}}
-                            	   end={{x: 1.6, y: 0}}
-                            	  style={{ flex:1, alignItems: 'center', justifyContent: 'center', borderRadius: 30 }}
-                            	>
-                            	  <Text style={{ fontWeight: 'bold',color: '#52D8C4', backgroundColor: 'transparent' }}>
-                            	  Register
-                            	  </Text>
+                                 start={{x: 0.0, y: 0}}
+                                 end={{x: 1.6, y: 0}}
+                                style={{ flex:1, alignItems: 'center', justifyContent: 'center', borderRadius: 30 }}
+                              >
+                                <Text style={{ fontWeight: 'bold',color: '#52D8C4', backgroundColor: 'transparent' }}>
+                                Register
+                                </Text>
               
                    </LinearGradient>
-            		</TouchableOpacity>
+                </TouchableOpacity>
 
-            	     	</View>
-            	</View>
+                    </View>
+              </View>
 
 
         </Image>
@@ -78,18 +78,18 @@ backgroundImage:{
     height: null,
 },
 wrapButton:{
-	flex: 0.3,
-	marginHorizontal: 93,
-	marginTop: 90,
-	marginBottom: 100,
-	
+  flex: 0.3,
+  marginHorizontal: 93,
+  marginTop: 90,
+  marginBottom: 100,
+  
 },
 loginButton:{
-	flex: 1,
+  flex: 1,
 
-	marginBottom: 15,
-	marginTop: 20,
-	
+  marginBottom: 15,
+  marginTop: 20,
+  
      borderWidth: 2,
      borderColor:'white',
      borderBottomLeftRadius: 30, borderBottomRightRadius: 30,
@@ -97,11 +97,11 @@ loginButton:{
   
 },
 registerButton:{
-	flex: 1,
+  flex: 1,
 
-	marginBottom: 15,
-	
-	
+  marginBottom: 15,
+  
+  
      borderWidth: 2,
      borderColor:'#52D8C4',
      borderBottomLeftRadius: 30, borderBottomRightRadius: 30,

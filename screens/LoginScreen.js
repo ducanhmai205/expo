@@ -33,7 +33,7 @@ UserLoginFunction = () =>{
 
  
  
-fetch('http://192.168.1.99/KhoahocAPI/User_Login.php', {
+fetch('http://192.168.1.56/KhoahocAPI/User_Login.php', {
   method: 'POST',
   headers: {
     'Accept': 'application/json',
@@ -71,7 +71,7 @@ fetch('http://192.168.1.99/KhoahocAPI/User_Login.php', {
   render() {
     return (
       <View style={styles.container}>
-      	<Image  source={require('../img/login.png')} style={styles.backgroundImage}>
+      	<Image  source={require('../img/loginscreen.png')} style={styles.backgroundImage}>
       		<View style={styles.wrapAll}>
       				
 
@@ -157,7 +157,7 @@ textTop:{
 },
 fbLogin:{
 	flex: 0.4,
-	
+
 	marginVertical: 5
 
 },

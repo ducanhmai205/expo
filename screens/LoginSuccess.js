@@ -17,7 +17,7 @@ class LoginSuccess extends Component {
     return (
       <View style={styles.container}>
               
-          <ImageBackground  source={require('../img/signin02.png')} style={styles.backgroundImage}>
+          <ImageBackground  source={require('../img/signinscreen.png')} style={styles.backgroundImage}>
               <View style={styles.imageAvatar}>
                       <Image   style={{ height: 100,
                       borderRadius: 50,

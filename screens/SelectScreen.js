@@ -14,7 +14,7 @@ class SelectScreen extends Component {
   render() {
   	const { navigate } = this.props.navigation;
     return (
-            		 <ImageBackground  source={require('../img/signin03_trainer1.png')} style={styles.backgroundImage}>
+            		 <ImageBackground  source={require('../img/signin03_trainerscreen.png')} style={styles.backgroundImage}>
 
 
             		           <View style={styles.nextButton}>

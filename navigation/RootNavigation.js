@@ -10,11 +10,13 @@ import LoginSuccess from '../screens/LoginSuccess';
 import SelectScreen from '../screens/SelectScreen';
 import DisplayUserTrainee from '../screens/DisplayUserTrainee';
 import DisplayUserTrainer from '../screens/DisplayUserTrainer';
+import InformationUser from '../screens/InformationUser';
+
 
 
 
 const DemoNavigation = StackNavigator(
-{
+{	
   TopScreen: { screen: TopScreen },
   RegisterScreen: { screen: RegisterScreen },
   LoginScreen: { screen: LoginScreen },
@@ -23,6 +25,7 @@ const DemoNavigation = StackNavigator(
   SelectScreen :{ screen: SelectScreen},
   DisplayUserTrainee : { screen: DisplayUserTrainee },
   DisplayUserTrainer : { screen: DisplayUserTrainer},
+  InformationUser : { screen: InformationUser}
 },
 {
 	headerMode:'none'
