@@ -51,7 +51,7 @@ export default class LoginFB extends Component {
       <View style={styles.container}>
         
           <TouchableOpacity  style={styles.one} onPress={this._handleFacebookLogin}>
-                
+                 <Text style={styles.TextStyle}> SUBMIT </Text>
             </TouchableOpacity>
        
         

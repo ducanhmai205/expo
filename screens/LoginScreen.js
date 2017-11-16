@@ -90,6 +90,7 @@ fetch('http://192.168.1.56/KhoahocAPI/User_Login.php', {
 							<View style={styles.nameInput}>
 								<TextInput
 									 style={{flex: 1,paddingLeft: 20}}
+                   underlineColorAndroid='transparent'
                                      placeholder="E-mail"
                                      placeholderTextColor = "#47E5B3"
                                      onChangeText={UserEmail => this.setState({UserEmail})}
@@ -102,6 +103,7 @@ fetch('http://192.168.1.56/KhoahocAPI/User_Login.php', {
 								<TextInput
 									 style={{flex: 1,paddingLeft: 20}}
 									 placeholderTextColor = "#47E5B3"
+                   underlineColorAndroid='transparent'
                                      placeholder="Password"
                                      onChangeText={UserPassword => this.setState({UserPassword})}
               						 secureTextEntry
