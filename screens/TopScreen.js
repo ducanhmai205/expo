@@ -8,58 +8,55 @@ import {
   Text,
   Image,
   TouchableOpacity,
-
+  Platform
 } from 'react-native';
 import { LinearGradient } from 'expo';
 class TopScreen extends Component {
   render() {
         const { navigate } = this.props.navigation;
         const Backgrounds = {
-          Login: require('../img/topscreen.png')
+        Login: require('../img/topscreen.png')
 };
-    return (
+  return (
       <View style={styles.container}>
         <Image  source={Backgrounds.Login} style={styles.backgroundImage}>
-              <View style={styles.wrapButton}>
-                  <View style={styles.loginButton}>
-                    <TouchableOpacity onPress={ ()=> {navigate('LoginScreen')}} style={{flex: 1,}}>
-                      
-                     <LinearGradient
-                       colors={['#BDFFF3','#4AC29A',]}
-                       
-                        start={{x: 0.0, y: 0}}
-                        end={{x: 1.6, y: 0}}
-                       style={{ flex:1, alignItems: 'center', justifyContent: 'center', borderRadius: 30 }}
-                     >
-                       <Text style={{ fontWeight: 'bold',color: '#fff', backgroundColor: 'transparent' }}>
-                       L O G I N
-                       </Text>
-              
-                   </LinearGradient>
-                </TouchableOpacity>
+             <View style={styles.containerOne}>
+               
+             </View>
+            
+             <View style={styles.containerButton}>
+               <View style={styles.loginButton}>
+                  <View style={styles.rightSpace} /> 
+                  <View style={styles.mainButtonLogin}>
+                      <TouchableOpacity onPress={ ()=> {navigate('LoginScreen')}} style={{flex: 1,}}>
+                            <Image source={require('../img/user/loginbuttontop.png')} style={styles.loginImage} resizeMode="contain">
+                            </Image>
+                      </TouchableOpacity>
+                  </View> 
+
+                  <View style={styles.leftButton} />
+
+                    
+              </View>                                   
+                <View style={styles.registerButton}>
+                      <View style={styles.leftRegister} />
+
+                      <View style={styles.mainButtonRegister}>
+                            <TouchableOpacity onPress={ ()=> {navigate('RegisterScreen')}} style={{flex: 1,}}>
+                                <Image source={require('../img/user/registerbuttontop.png')} style={styles.registerImage}>
+                                </Image>
+                            </TouchableOpacity>
+                      </View>
+
+                      <View style={styles.rightRegister} />
+
+                  
+                </View>
+            </View>
+                  <View style={styles.bottom}>
 
                   </View>
-
-              <View style={styles.registerButton}>
-                <TouchableOpacity onPress={ ()=> {navigate('RegisterScreen')}} style={{flex: 1,}}>
-                      
-                              <LinearGradient
-                                colors={['#ffffff','#ffffff',]}
-                       
-                                 start={{x: 0.0, y: 0}}
-                                 end={{x: 1.6, y: 0}}
-                                style={{ flex:1, alignItems: 'center', justifyContent: 'center', borderRadius: 30 }}
-                              >
-                                <Text style={{ fontWeight: 'bold',color: '#52D8C4', backgroundColor: 'transparent' }}>
-                                Register
-                                </Text>
-              
-                   </LinearGradient>
-                </TouchableOpacity>
-
-                    </View>
-              </View>
-
+            
 
         </Image>
        </View>
@@ -73,42 +70,68 @@ container:{
 },
 backgroundImage:{
   flex: 1,
-  flexDirection: 'column-reverse' ,
-    width: null,
-    height: null,
+  width: null,
+  height: null,
 },
-wrapButton:{
-  flex: 0.3,
-  marginHorizontal: 93,
-  marginTop: 90,
-  marginBottom: 100,
-  
+loginImage:{
+  flex:1,
+  width: null,
+  height: null,
+},
+registerImage:{
+  flex:1,
+  width: null,
+  height: null,
+},
+containerOne:{
+  flex: 4,
+
+},
+containerButton:{
+  flex: 1.2,
+ 
 },
 loginButton:{
   flex: 1,
+  flexDirection: 'row',
+  
+},
+rightSpace:{
+  flex: 1,
 
-  marginBottom: 15,
-  marginTop: 20,
-  
-     borderWidth: 2,
-     borderColor:'white',
-     borderBottomLeftRadius: 30, borderBottomRightRadius: 30,
-     borderTopLeftRadius: 30, borderTopRightRadius: 30,
-  
+},
+mainButtonLogin:{
+  flex: 2.3,
+  marginBottom: (Platform.OS === 'ios') ? 18 : 0,
+  paddingRight:12,
+  marginHorizontal:3,
+
+
+},
+leftButton:{
+  flex: 0.9,
+
+},
+leftRegister:{
+  flex: 1,
+},
+mainButtonRegister:{
+  flex: 2.3,
+  marginBottom: (Platform.OS === 'ios') ? 20 : 5,
+  marginTop: (Platform.OS ==='ios') ? 0 : 11,
+  marginRight:5
+},
+rightRegister:{
+  flex: 0.9,
 },
 registerButton:{
   flex: 1,
-
-  marginBottom: 15,
+  flexDirection: 'row',
   
-  
-     borderWidth: 2,
-     borderColor:'#52D8C4',
-     borderBottomLeftRadius: 30, borderBottomRightRadius: 30,
-      borderTopLeftRadius: 30, borderTopRightRadius: 30,
-   
-}
-
+},
+bottom:{
+  flex:0.8,
+},
 
 });
 

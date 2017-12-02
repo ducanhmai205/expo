@@ -11,19 +11,17 @@ import {
   ImageBackground
 } from 'react-native';
 
-class LoginSuccess extends Component {
+class WelcomeTrainee extends Component {
   render() {
         const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
               
-          <ImageBackground  source={require('../img/signinscreen.png')} style={styles.backgroundImage}>
+          <ImageBackground  source={require('../../img/screen/welcomescreen.png')} style={styles.backgroundImage}>
               <View style={styles.imageAvatar}>
-                      <Image   style={{ height: 100,
-                      borderRadius: 50,
-                      width: 100 }}
-                      source={require('../img/default_avatar.png')} />
-                      <Text style={styles.text}> こんにちは {this.props.navigation.state.params.Email}  </Text>
+                       <Image  source={require('../../img/user/avt.png')} style={styles.avtImage} resizeMode="contain">
+                       </Image>
+                      <Text style={styles.text}> こんにちは   </Text>
                       <Text style={styles.text2}> 
                                  こんにちは今日はどのようにやってい？
                        </Text>
@@ -33,7 +31,7 @@ class LoginSuccess extends Component {
 
           <View style={styles.nextButton}>
                 <TouchableOpacity style={styles.TouchableOpacity} onPress={ ()=> {
-                navigate('SelectScreen');}}>
+                navigate('TraineeTreatment',{   });}}>
                     <Text style={{fontWeight: 'bold'}}> START ! </Text> 
              </TouchableOpacity> 
               
@@ -57,16 +55,22 @@ backgroundImage:{
   height: null
 },
 imageAvatar:{
-  flex: 1,
+  flex: 0.7,
   alignItems: 'center',
   justifyContent: 'center',
-  marginBottom: 40
+  marginBottom: 40,
+  
+},
+avtImage:{
+  flex: 0.6,
+  width: 150,
+  marginTop: 60
 },
 text:{
-   backgroundColor:'rgba(0,0,0,0)',
+  backgroundColor:'rgba(0,0,0,0)',
   fontSize: 20,
   color: 'black',
-  marginTop: 10,
+
   marginBottom: 15,
   justifyContent: 'center',
  alignItems: 'center',
@@ -97,4 +101,4 @@ TouchableOpacity:{
 });
 
 
-export default LoginSuccess;
+export default WelcomeTrainee;

@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Swiper from 'react-native-swiper';
 import StarRating from 'react-native-star-rating';
-class InformationUser extends Component {
+class DetailTrainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +30,7 @@ class InformationUser extends Component {
     const {goBack} = this.props.navigation;
     return (
       
-           <ImageBackground  source={require('../img/trainer_detail1.png')} style={styles.backgroundImage}>
+           <ImageBackground  source={require('../../img/screen/trainer_detailscreen.png')} style={styles.backgroundImage}>
                  <View style={styles.container}>
                   <View style={styles.header}>
                       <View style={styles.icon}>
@@ -51,15 +51,15 @@ class InformationUser extends Component {
                       <View style={styles.swiper}>
                             <Swiper style={styles.wrapperSwiper}>
                               <View style={styles.slide1}>
-                                <Image  source={require('../img/1.png')} style={styles.imageswiper}>
+                                <Image  source={require('../../img/1.png')} style={styles.imageswiper}>
                                 </Image>
                                 </View>
                               <View style={styles.slide2}>
-                                <Image  source={require('../img/2.png')} style={styles.imageswiper}>
+                                <Image  source={require('../../img/2.png')} style={styles.imageswiper}>
                                 </Image>
                               </View>
                               <View style={styles.slide3}>
-                                 <Image  source={require('../img/2.png')} style={styles.imageswiper}>
+                                 <Image  source={require('../../img/2.png')} style={styles.imageswiper}>
                                </Image>
                               </View>
                             </Swiper>                     
@@ -268,4 +268,4 @@ circle: {
 });
 
 
-export default InformationUser;
+export default DetailTrainer;

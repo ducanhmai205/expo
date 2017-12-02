@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Alert,Image } from 'react-native';
 
 import { Facebook } from "expo";
 
@@ -9,7 +9,7 @@ export default class LoginFB extends Component {
   _handleFacebookLogin = async () => {
     try {
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(
-        '1201211719949057',
+        '299185680599243',
         { permissions: ['public_profile'] }
       );
 
@@ -51,7 +51,8 @@ export default class LoginFB extends Component {
       <View style={styles.container}>
         
           <TouchableOpacity  style={styles.one} onPress={this._handleFacebookLogin}>
-                 <Text style={styles.TextStyle}> SUBMIT </Text>
+                     <Image  source={require('../img/FBbutton.png')} style={{flex: 1,width:null,height:null}}>
+                                          </Image>
             </TouchableOpacity>
        
         
