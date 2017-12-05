@@ -68,7 +68,7 @@ UserRegistrationFunction = () =>{
  const { jobID } = this.state;
  
  console.log("test",jobID)
-fetch('http://192.168.1.57:8000/api/v1/customer/register', {
+fetch('http://35.185.68.16/api/v1/customer/register', {
   method: 'POST',
   headers: {
     'Accept': 'application/json',
@@ -92,15 +92,15 @@ fetch('http://192.168.1.57:8000/api/v1/customer/register', {
     console.log("user",responseJson.account.type)
       if(responseJson.account.type === 'customer')
         {
-console.log("user",responseJson.account.customer.name)
+console.log("user",responseJson.account)
             this.props.navigation.navigate('WelcomeTrainee', { Account: responseJson.account  });
  
         }
         else if(responseJson.account.type === 'trainer')
         {
- console.log("trainer",responseJson.account.trainer.name)
-            this.props.navigation.navigate('WelcomeTrainer', { Name: responseJson.account.trainer.name });
- 
+ console.log("trainer",responseJson.account)
+            this.props.navigation.navigate('WelcomeTrainer', { Account: responseJson.account  });
+    
         }
       }
         else{
@@ -172,11 +172,12 @@ console.log("user",responseJson.account.customer.name)
     const {goBack} = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Image  source={require('../img/registerscreen.png')} style={styles.backgroundImage}>
+        <Image  source={require('../img/signinbg.png')} style={styles.backgroundImage}>
           <View style={styles.containerImage}>
               <View style={styles.textHeader}>
               
-                            <TouchableOpacity  style={{flex: 0.2,}}  onPress={() => goBack()}>
+                            <TouchableOpacity  style={{flex: 0.2,}}  onPress={()=> {
+                          navigate('TopScreen');}}>
                                   <Image  source={require('../img/Xbutton.png')} style={{flex: 0.5,width:null,height:null,marginTop:10}}>
                              
                                   </Image>

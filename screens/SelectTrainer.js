@@ -15,7 +15,7 @@ import {
 import Dimensions from 'Dimensions';
 import { Ionicons, FontAwesome,Foundation} from '@expo/vector-icons';
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
-class SelectTrainer extends Component {
+class SelectTrainee extends Component {
   constructor(props){
     super(props);
     this.state={
@@ -50,7 +50,7 @@ const { navigate } = this.props.navigation;
 const {goBack} = this.props.navigation;
     return (
       <View style={styles.container}>
-           <ImageBackground  source={require('../../img/screen/selectscreen.png')} style={styles.backgroundImage}>
+           <ImageBackground  source={require('../img/signin04_trainerscreen.png')} style={styles.backgroundImage}>
             <View style={styles.containerImage}>
                 <View style={styles.header}>
                 <TouchableOpacity style={{flex: 0.3}} onPress={() => goBack()}>
@@ -123,7 +123,7 @@ const {goBack} = this.props.navigation;
             </View>
             <View style={styles.nextButton}>
                           <TouchableOpacity style={styles.TouchableOpacity} onPress={ ()=> {
-                          navigate('InformationUser');}}>
+                          navigate('TraineeProfile',{Account: this.props.navigation.state.params.Account})}}>
                               <Text style={{fontWeight: 'bold'}}> FINISH <Ionicons  name="ios-arrow-forward" size={15}  /> </Text> 
                         </TouchableOpacity> 
                         </View>
@@ -237,4 +237,4 @@ alignItems: 'center',
 });
 
 
-export default SelectTrainer;
+export default SelectTrainee;

@@ -18,8 +18,13 @@ class DetailTrainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      starCount: 3.5
+      starCount: 3.5,
+      pressIcon: true,
     };
+  }
+  pressIcon = () =>
+  {
+     this.setState({ pressIcon: !this.state.pressIcon });
   }
   onStarRatingPress(rating) {
     this.setState({
@@ -27,10 +32,11 @@ class DetailTrainer extends Component {
     });
   }
   render() {
+    const { navigate } = this.props.navigation;
     const {goBack} = this.props.navigation;
     return (
       
-           <ImageBackground  source={require('../../img/screen/trainer_detailscreen.png')} style={styles.backgroundImage}>
+           <ImageBackground  source={require('../img/trainer_detailscreen.png')} style={styles.backgroundImage}>
                  <View style={styles.container}>
                   <View style={styles.header}>
                       <View style={styles.icon}>
@@ -51,15 +57,15 @@ class DetailTrainer extends Component {
                       <View style={styles.swiper}>
                             <Swiper style={styles.wrapperSwiper}>
                               <View style={styles.slide1}>
-                                <Image  source={require('../../img/1.png')} style={styles.imageswiper}>
+                                <Image  source={require('../img/1.png')} style={styles.imageswiper}>
                                 </Image>
                                 </View>
                               <View style={styles.slide2}>
-                                <Image  source={require('../../img/2.png')} style={styles.imageswiper}>
+                                <Image  source={require('../img/2.png')} style={styles.imageswiper}>
                                 </Image>
                               </View>
                               <View style={styles.slide3}>
-                                 <Image  source={require('../../img/2.png')} style={styles.imageswiper}>
+                                 <Image  source={require('../img/2.png')} style={styles.imageswiper}>
                                </Image>
                               </View>
                             </Swiper>                     
@@ -141,8 +147,9 @@ class DetailTrainer extends Component {
 
                                     <View style={{flex: 1,justifyContent: 'center',alignItems: 'center',}}>
                                          <View style={styles.circle}>
-                                           <Icon name="handshake-o" size={25} color="red" />
-
+                                         <TouchableOpacity   onPress = { this.pressIcon }>
+                                           <Icon name="handshake-o" size={25} color={( this.state.pressIcon ) ? 'green':'red'} />
+                                          </TouchableOpacity>
                                          </View>
                                      </View>
 

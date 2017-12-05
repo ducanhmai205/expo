@@ -46,7 +46,7 @@ const { navigate } = this.props.navigation;
 const {goBack} = this.props.navigation;
     return (
       <View style={styles.container}>
-           <ImageBackground  source={require('../../img/screen/selectscreen.png')} style={styles.backgroundImage}>
+           <ImageBackground  source={require('../img/signin04_trainerscreen.png')} style={styles.backgroundImage}>
             <View style={styles.containerImage}>
                 <View style={styles.header}>
                 <TouchableOpacity style={{flex: 0.3}} onPress={() => goBack()}>
@@ -101,7 +101,7 @@ const {goBack} = this.props.navigation;
             </View>
             <View style={styles.nextButton}>
                           <TouchableOpacity style={styles.TouchableOpacity} onPress={ ()=> {
-                          navigate('InformationUser');}}>
+                          navigate('TrainerProfile',{Account: this.props.navigation.state.params.Account });}}>
                               <Text style={{fontWeight: 'bold'}}> FINISH <Ionicons  name="ios-arrow-forward" size={15}  /> </Text> 
                         </TouchableOpacity> 
                         </View>

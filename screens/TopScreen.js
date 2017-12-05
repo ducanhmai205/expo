@@ -15,7 +15,7 @@ class TopScreen extends Component {
   render() {
         const { navigate } = this.props.navigation;
         const Backgrounds = {
-        Login: require('../img/topscreen.png')
+        Login: require('../img/topbg.png')
 };
   return (
       <View style={styles.container}>
@@ -29,7 +29,7 @@ class TopScreen extends Component {
                   <View style={styles.rightSpace} /> 
                   <View style={styles.mainButtonLogin}>
                       <TouchableOpacity onPress={ ()=> {navigate('LoginScreen')}} style={{flex: 1,}}>
-                            <Image source={require('../img/user/loginbuttontop.png')} style={styles.loginImage} resizeMode="contain">
+                            <Image source={require('../img/user/top3.png')} style={styles.loginImage} resizeMode="contain">
                             </Image>
                       </TouchableOpacity>
                   </View> 
@@ -43,7 +43,7 @@ class TopScreen extends Component {
 
                       <View style={styles.mainButtonRegister}>
                             <TouchableOpacity onPress={ ()=> {navigate('RegisterScreen')}} style={{flex: 1,}}>
-                                <Image source={require('../img/user/registerbuttontop.png')} style={styles.registerImage}>
+                                <Image source={require('../img/buttontop.png')} style={styles.registerImage}>
                                 </Image>
                             </TouchableOpacity>
                       </View>

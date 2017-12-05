@@ -11,19 +11,24 @@ import {
   ImageBackground
 } from 'react-native';
 
-class WelcomeTrainer extends Component {
+class WelcomeTrainee extends Component {
+
   render() {
         const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
               
-          <ImageBackground  source={require('../../img/screen/welcometrainerscreen.png')} style={styles.backgroundImage}>
+          <ImageBackground  source={require('../img/signin02.png')} style={styles.backgroundImage}>
               <View style={styles.imageAvatar}>
-                       <Image  source={require('../../img/user/avt.png')} style={styles.avtImage} resizeMode="contain">
+                       <Image  source={require('../img/user/avt.png')} style={styles.avtImage} resizeMode="contain">
                        </Image>
-                      <Text style={styles.text}> こんにちは   </Text>
+                      <Text style={styles.text}> ようこそ、{this.props.navigation.state.params.Account.customer.name} さん ! </Text>
                       <Text style={styles.text2}> 
-                                 こんにちは今日はどのようにやってい？
+                           トレーニングの効果を出す為に
+                       </Text>
+                       <Text style={styles.text2}> 
+                           もう少しあなたの事を教えてください
+
                        </Text>
                     </View>
 
@@ -31,8 +36,10 @@ class WelcomeTrainer extends Component {
 
           <View style={styles.nextButton}>
                 <TouchableOpacity style={styles.TouchableOpacity} onPress={ ()=> {
-                navigate('TrainerSpecialize',{});}}>
-                    <Text style={{fontWeight: 'bold'}}> START ! </Text> 
+
+                navigate('TraineeTreatment',{ Account: this.props.navigation.state.params.Account  });}}>
+
+                    <Text style={{fontWeight: 'bold',color:'#3C2C6C'}}> START ! </Text> 
              </TouchableOpacity> 
               
 
@@ -58,17 +65,19 @@ imageAvatar:{
   flex: 0.7,
   alignItems: 'center',
   justifyContent: 'center',
-  marginBottom: 40
+  marginBottom: 40,
+  
 },
 avtImage:{
-  marginTop: 20,
-  width: 150
+  flex: 0.6,
+  width: 150,
+  marginTop: 60
 },
 text:{
-   backgroundColor:'rgba(0,0,0,0)',
+  backgroundColor:'rgba(0,0,0,0)',
   fontSize: 20,
-  color: 'black',
-  
+  color: '#402677',
+
   marginBottom: 15,
   justifyContent: 'center',
  alignItems: 'center',
@@ -77,7 +86,8 @@ text:{
 text2:{
   backgroundColor:'rgba(0,0,0,0)',
   fontSize: 15,
-  color: 'black',
+    marginBottom: 5,
+  color: '#402677',
  justifyContent: 'center',
  alignItems: 'center',
 },
@@ -99,4 +109,4 @@ TouchableOpacity:{
 });
 
 
-export default WelcomeTrainer;
+export default WelcomeTrainee;

@@ -11,7 +11,7 @@ import {
   Alert,
   TouchableOpacity,
   Platform,
-  TouchableHighlight
+  TouchableHighlight,
 } from 'react-native';
 import Dimensions from 'Dimensions';
 import { StackNavigator } from 'react-navigation';
@@ -33,7 +33,7 @@ managePasswordVisibility = () =>
   }
 
 UserLoginFunction = () =>{
- fetch('http://192.168.1.57:8000/api/v1/customer/login', {
+ fetch('http://35.185.68.16/api/v1/customer/login', {
   method: 'POST',
   headers: {
     'Accept': 'application/json',
@@ -55,10 +55,12 @@ UserLoginFunction = () =>{
          if(responseJson.status === true)
          {
             if(responseJson.account.type === 'trainer'){
-              this.props.navigation.navigate('TrainerProfile', { Email: this.state.UserEmail,  });
+              this.props.navigation.navigate('TrainerProfile', { Account: responseJson.account  });
+              console.log('2',responseJson.account)
               }
             if(responseJson.account.type === 'customer'){
-              this.props.navigation.navigate('TraineeProfile', { Email: this.state.UserEmail,  });
+              this.props.navigation.navigate('TraineeProfile', { Account: responseJson.account  });
+              console.log('1',responseJson.account)
               }
          }
          else{
@@ -99,11 +101,12 @@ UserLoginFunction = () =>{
 
     return (
       <View style={styles.container}>
-            <Image  source={require('../img/screen/loginbgg.png')} style={styles.backgroundImage}>
+            <Image  source={require('../img/user/loginbgg.png')} style={styles.backgroundImage}>
                   <View style={styles.containerImage}>
                         <View style={styles.textHeader}>
                                 
-                            <TouchableOpacity  style={{flex: 0.2,}} onPress={() => goBack()}>
+                            <TouchableOpacity  style={{flex: 0.2,}} onPress={()=> {
+                          navigate('TopScreen');}}>
                                   <Image  source={require('../img/Xbutton.png')} style={styles.xButton}>
                                   </Image>
                             </TouchableOpacity>
