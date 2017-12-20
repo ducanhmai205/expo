@@ -10,10 +10,69 @@ import {
   Image,
   ImageBackground
 } from 'react-native';
+import {Constants, Permissions, Notifications} from 'expo';
 
+  const PUSH_ENDPOINT = 'https://test-expo.herokuapp.com/tokens';
 class WelcomeTrainee extends Component {
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+        accountId : `${this.props.navigation.state.params.Account.customer.id}`,
+       image: `${this.props.navigation.state.params.Account.avatar}`,
+          receivedNotification: null,
+          lastNotificationId: null,
+    };
+  
+  }
+componentDidMount() {
 
+
+          this.registerForPushNotificationsAsync();
+
+          //Đăng ký lắng nghe sự kiện push
+          Notifications.addListener((receivedNotification) => {
+             //Neu app ios dang chay thi phải tạo view hiển thị local Notification
+
+              this.setState({
+                  receivedNotification,
+                  lastNotificationId: receivedNotification.notificationId,
+              });
+          });
+      }
+
+      registerForPushNotificationsAsync = async () => {
+          let {status} = await Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS);
+
+          // Stop here if the user did not grant permissions
+          if (status !== 'granted') {
+              return;
+          }
+
+          let token = await Notifications.getExpoPushTokenAsync();
+         console.log("ducah",token)
+          console.log("ducah",this.state.accountId)
+         this.guiTokenLenServerMinh(token);
+      };
+
+      guiTokenLenServerMinh = async (token)=>{
+          // Gui Push token lên server của mình
+          // Thường là cần user_id và push_token
+          return fetch(PUSH_ENDPOINT, {
+              method: 'POST',
+              headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  token: {
+                      value: token,
+                  },
+              }),
+          });
+      };
   render() {
+        const { image } = this.state;
         const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
@@ -21,6 +80,8 @@ class WelcomeTrainee extends Component {
           <ImageBackground  source={require('../img/signin02.png')} style={styles.backgroundImage}>
               <View style={styles.imageAvatar}>
                        <Image  source={require('../img/user/avt.png')} style={styles.avtImage} resizeMode="contain">
+                          {image &&
+                          <Image source={{ uri: this.state.image }} style={{ width: 90, height: 90,borderRadius: 90/2, }} resizeMode="stretch" />}
                        </Image>
                       <Text style={styles.text}> ようこそ、{this.props.navigation.state.params.Account.customer.name} さん ! </Text>
                       <Text style={styles.text2}> 
@@ -71,7 +132,11 @@ imageAvatar:{
 avtImage:{
   flex: 0.6,
   width: 150,
-  marginTop: 60
+  marginTop: 60,
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingRight: 5,
+  paddingBottom: 4
 },
 text:{
   backgroundColor:'rgba(0,0,0,0)',

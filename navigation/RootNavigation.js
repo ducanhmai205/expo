@@ -17,16 +17,24 @@ import SelectTrainer from '../screens/SelectTrainer';
 import TraineeProfile from '../screens/TraineeProfile';
 import TrainerProfile from '../screens/TrainerProfile';
 import DetailTrainer from '../screens/DetailTrainer';
+import DetailUser from '../screens/DetailUser';
 import MenuTrainer from '../screens/MenuTrainer';
 import MenuUser from '../screens/MenuUser';
 import InfomationVersion from '../screens/Infomation/InfomationVersion';
 import Policy from '../screens/Infomation/Policy';
 import Term from '../screens/Infomation/Term';
+import UpdatePassword from '../screens/UpdatePassword';
+import UpdatePassTrainer from '../screens/UpdatePassTrainer';
+import UpdatePr from '../screens/UpdatePr';
+import ChangeIssue from '../screens/ChangeIssue';
+import ChangeSpecializes from '../screens/ChangeSpecializes';
+
 const RootNavigation = StackNavigator(
 {	
   	TopScreen: { screen: TopScreen },
  	RegisterScreen: { screen: RegisterScreen },
  	LoginScreen: { screen: LoginScreen},
+ 	LoginFB: { screen: LoginFB},
  	ForgotPassword: { screen: ForgotPassword},
  	WelcomeTrainee :{ screen: WelcomeTrainee},
  	WelcomeTrainer :{ screen: WelcomeTrainer},
@@ -42,6 +50,14 @@ const RootNavigation = StackNavigator(
  	InfomationVersion : { screen: InfomationVersion},
  	Policy : { screen: Policy},
  	Term : { screen: Term},
+ 	UpdatePassword : { screen: UpdatePassword},
+ 	UpdatePassTrainer : { screen: UpdatePassTrainer},
+ 	UpdatePr : { screen: UpdatePr},
+ 	ChangeIssue : { screen: ChangeIssue},
+ 	ChangeSpecializes : { screen: ChangeSpecializes},
+ 	DetailUser : { screen: DetailUser},
+
+ 
  
 },
 {

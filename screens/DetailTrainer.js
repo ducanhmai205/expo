@@ -20,33 +20,116 @@ class DetailTrainer extends Component {
     this.state = {
       starCount: 3.5,
       pressIcon: true,
+      issue : '',
+      id :`${this.props.navigation.state.params.Account.customer.id}`,
+      type: `${this.props.navigation.state.params.Account.type}`,
+      access_token :`${this.props.navigation.state.params.Account.customer.access_token}`,
+      trainerId: `${this.props.navigation.state.params.id}`,
     };
   }
   pressIcon = () =>
   {
      this.setState({ pressIcon: !this.state.pressIcon });
+     console.log("testtrainer",this.props.navigation.state.params.Account)
   }
   onStarRatingPress(rating) {
     this.setState({
       starCount: rating
     });
   }
+//   componentWillMount() {
+//   let formdata = new FormData();
+//   formdata.append("access_token", this.state.access_token);
+//   formdata.append("type", this.state.type);
+//   formdata.append("id", this.state.id);
+
+// //   console.log('id2',this.props.navigation.state.params.Account.customer.id)
+// //   console.log('token2',this.props.navigation.state.params.Account.customer.access_token)
+//   fetch('http://35.185.68.16/api/v1/trainer/getPRDetail', {
+//     method: 'post',
+//     headers: {
+//       'Content-Type': 'multipart/form-data',
+//     },
+//     body: formdata
+
+//   }).then((response) => response.json())
+//   .then((responseJson) => {
+
+    
+
+
+//     var content = responseJson.data.pr_content;
+//   console.log('content',content)
+    
+//     this.setState({
+     
+//   content : content
+ 
+//     })
+   
+  
+//    })
+
+
+// }
+componentWillMount() {
+
+
+  let formdata = new FormData();
+  formdata.append("access_token", this.state.access_token);
+  formdata.append("type", this.state.type);
+  formdata.append("id", this.state.id);
+  formdata.append("trainerId", this.state.trainerId);
+
+
+  fetch('http://35.185.68.16/api/v1/trainer/detail', {
+    method: 'post',
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    body: formdata
+
+  }).then((response) => response.json())
+  .then((responseJson) => {
+   
+    
+
+
+    var content = responseJson;
+
+     console.log("issue",content)
+    this.setState({
+     
+  content : content,
+  image: content.avatar,
+  name: content.data.name,
+  issue: content.rawSpecializes,
+  prContent: content.data.pr_content,
+
+    })
+   console.log("issue",this.state.image)
+  
+   })
+
+
+}
   render() {
     const { navigate } = this.props.navigation;
     const {goBack} = this.props.navigation;
+    const  image  = this.state;
     return (
       
            <ImageBackground  source={require('../img/trainer_detailscreen.png')} style={styles.backgroundImage}>
                  <View style={styles.container}>
                   <View style={styles.header}>
                       <View style={styles.icon}>
-                      <TouchableOpacity onPress={ () => goBack(null)  }>
+                      <TouchableOpacity style={{flex: 1,justifyContent: 'center',}}onPress={ () => goBack(null)  }>
                           <Ionicons name="ios-arrow-back" size={20} />
                       </TouchableOpacity>
                       </View>
 
                       <View style={styles.text}>
-                          <Text style={{fontSize:20,fontWeight: 'bold'  }}> こんにちは、元気ですか </Text>
+                          <Text style={{fontSize:20,fontWeight: 'bold'  }}> {this.state.name}</Text>
 
                       </View>
 
@@ -55,20 +138,8 @@ class DetailTrainer extends Component {
 
                   <View style={styles.content}>
                       <View style={styles.swiper}>
-                            <Swiper style={styles.wrapperSwiper}>
-                              <View style={styles.slide1}>
-                                <Image  source={require('../img/1.png')} style={styles.imageswiper}>
-                                </Image>
-                                </View>
-                              <View style={styles.slide2}>
-                                <Image  source={require('../img/2.png')} style={styles.imageswiper}>
-                                </Image>
-                              </View>
-                              <View style={styles.slide3}>
-                                 <Image  source={require('../img/2.png')} style={styles.imageswiper}>
-                               </Image>
-                              </View>
-                            </Swiper>                     
+                          <Image  source={{uri: this.state.image }} resizeMode="stretch" style={styles.imageswiper}>
+                           </Image>                   
 
                       </View>
 
@@ -76,30 +147,34 @@ class DetailTrainer extends Component {
                             
                                  <View style={styles.namecontent}>
                                     <View style={styles.textName}>
-                                     <Text style={{fontSize:17,fontWeight: 'bold',paddingTop:5}}> 元気ですかすかか </Text>
-                                     <Text style={{fontSize:11,paddingTop:5}}> 元気ですか </Text>
+                                     <Text style={{fontSize:17,fontWeight: 'bold',paddingTop:5}}> {this.state.name} </Text>
+                                     <Text style={{fontSize:11,paddingTop:5}}> {this.state.issue} </Text>
                                     </View>
 
                                     <View style={styles.ratingcontent}>
-                                          <View style={{flex: 1,flexDirection: 'row',justifyContent: 'space-between',}}>
-                                              <Text style={{fontSize:11,paddingTop:14}}> 元気ですか </Text>
-                                                    <StarRating
+                                          <View style={{flex: 1,flexDirection: 'row',paddingTop:10}}>
+                                              <Text style={styles.textStar}> フレンドリー </Text>
+                                                    <View style={{paddingLeft: 8,}} >
+                                                      <StarRating
+
                                                         disabled={false}
                                                         emptyStar={'ios-star-outline'}
                                                         fullStar={'ios-star'}
                                                         halfStar={'ios-star-half'}
                                                         iconSet={'Ionicons'}
                                                         maxStars={5}
-                                                        starSize={10}
+                                                        starSize={15}
                                                         starColor={'green'}
                                                         rating={this.state.starCount}
                                                         selectedStar={(rating) => this.onStarRatingPress(rating)}
                                                         
-                                                      />
+                                                       />
+                                                    </View>
                                               </View>
-                                              <View style={{flex: 1,flexDirection: 'row',justifyContent: 'space-between',}}>
+                                              <View style={{flex: 1,flexDirection: 'row'}}>
 
-                                              <Text style={{fontSize:11,paddingTop:5}}> 元気ですか </Text>
+                                              <Text  style={styles.textStar}> 減量 </Text>
+                                                <View style={{paddingLeft: 60,}} >
                                               <StarRating
                                                         disabled={false}
                                                         emptyStar={'ios-star-outline'}
@@ -107,16 +182,17 @@ class DetailTrainer extends Component {
                                                         halfStar={'ios-star-half'}
                                                         iconSet={'Ionicons'}
                                                         maxStars={5}
-                                                        starSize={10}
+                                                        starSize={15}
                                                         starColor={'green'}
                                                         rating={this.state.starCount}
                                                         selectedStar={(rating) => this.onStarRatingPress(rating)}
 
                                                       />
-
+                                                      </View>
                                               </View>
-                                              <View style={{flex: 1,flexDirection: 'row',justifyContent: 'space-between',}}>
-                                              <Text style={{fontSize:11,paddingTop:3}}> 元気ですか </Text>
+                                              <View style={{flex: 1,flexDirection: 'row'}}>
+                                              <Text  style={styles.textStar}> 痛みを取る </Text>
+                                              <View style={{paddingLeft: 15,}} >
                                               <StarRating
                                                         disabled={false}
                                                         emptyStar={'ios-star-outline'}
@@ -124,25 +200,27 @@ class DetailTrainer extends Component {
                                                         halfStar={'ios-star-half'}
                                                         iconSet={'Ionicons'}
                                                         maxStars={5}
-                                                        starSize={10}
+                                                        starSize={15}
                                                         starColor={'green'}
                                                         rating={this.state.starCount}
                                                         selectedStar={(rating) => this.onStarRatingPress(rating)}
 
                                                       />
+                                                      </View>
                                               </View>
                                     </View>
                                  </View>
                                   <View
                                     style={{
-                                      borderBottomColor: 'green',
+                                      paddingTop:10,
+                                      borderBottomColor: '#24DFA8',
                                       borderBottomWidth: 2,
                                     }}
                                   />
 
                                  <View style={styles.infocontent}>
                                     <View style={{flex: 2,}}>
-                                        <Text style={{fontSize:13}}> 元気ですか 元気ですか 元気ですか 元気ですか 元気ですか元気ですか元気ですか元気ですか元気ですか元気ですか元気ですか元気ですか元気ですか </Text>
+                                        <Text style={{fontSize:13}}> {this.state.prContent}</Text>
                                     </View>
 
                                     <View style={{flex: 1,justifyContent: 'center',alignItems: 'center',}}>
@@ -174,6 +252,8 @@ backgroundImage:{
 imageswiper:{
  borderTopRightRadius: 20,
   borderTopLeftRadius: 20,
+  height: null,
+  width: null,
 flex: 1,
 overflow: 'hidden',
 },
@@ -249,6 +329,7 @@ maincontent:{
 },
 namecontent:{
 flex: 1,
+
 },
 textName:{
 flex: 1.2,
@@ -256,10 +337,14 @@ flex: 1.2,
 },
 ratingcontent:{
   flex: 2,
- paddingRight: 15
+ paddingRight: 15,
+
+},
+textStart:{
+  fontSize: 11,
 },
 infocontent:{
-flex: 2,
+flex: 1.7,
 paddingTop: 15
 },
 circle: {

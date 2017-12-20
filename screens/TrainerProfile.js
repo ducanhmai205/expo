@@ -20,13 +20,7 @@ class TrainerProfile extends Component {
     super(props);
     this.state={
         hidePassword: true,
-         mang:[
-          {key:'0',hoten:"guest 1"},
-          {key:'1',hoten:"guest 2"},
-          {key:'2',hoten:"guest 3"},
-          {key:'3',hoten:"guest 4"},
-          {key:'4',hoten:"guest 5"},
-          ]
+        image: `${this.props.navigation.state.params.Account.avatar}`,
 
         }
       }
@@ -38,6 +32,7 @@ class TrainerProfile extends Component {
   render() {
      const { navigate } = this.props.navigation;
 const {goBack} = this.props.navigation;
+const { image } = this.state;
     return (
     
           <Image  source={require('../img/user/enter_trainerbg.png')} style={styles.backgroundImage}>
@@ -56,7 +51,18 @@ const {goBack} = this.props.navigation;
                                     <View style={styles.spaceHeader}>
                                     </View>
                                   <View style={styles.iconleftHeader}>
-                                  <TouchableOpacity style={{flex:1}}>
+                                  <TouchableOpacity style={{flex:1}}  onPress= { ()=>{
+                                                        let account = this.props.navigation.state.params.Account;
+                                                        let mySpecializes = account.mySpecializes;
+                                                 
+                                                        if(mySpecializes.length === 0 ){
+                                                        console.log("ducnt TraineeTreatment");
+                                                        navigate('TrainerSpecialize',{ Account:account  });
+                                                       }else {
+                                                  
+                                                         navigate('SelectTrainee',{ Account:account  });
+                                                       }
+                                                     }}>
                                             <Image  source={require('../img/user/grp.png')} style={styles.picIcon} />
                                     </TouchableOpacity>                                        
                                      
@@ -67,6 +73,8 @@ const {goBack} = this.props.navigation;
                                       <View style={styles.avatar}>
                                           <View style={styles.avatarImage}>
 
+                                               {image &&
+                                                <Image source={{ uri: this.state.image }} style={{ width: 100, height:100,borderRadius: 100/2, }} resizeMode="stretch" />}
                                           </View>
                                       </View>
 
@@ -77,7 +85,7 @@ const {goBack} = this.props.navigation;
                                                   </View>
                                                   <View style={styles.busyButton} >
                                                     <TouchableOpacity style={{flex:1,justifyContent: 'center',alignItems: 'center',}}>
-                                                         <Image  resizeMode="contain" source={require('../img/user/busy.png')} style={{flex: 1,}}>
+                                                         <Image  resizeMode="contain" source={require('../img/user/busy.png')} style={{flex: 0.8,}}>
 
                                                          </Image>
                                                     </TouchableOpacity>   
@@ -127,7 +135,7 @@ flexDirection:'row',
 },
 iconrightHeader:{
   flex: 0.15,
-  
+
   backgroundColor:'rgba(0,0,0,0)',
   justifyContent: 'center',
   alignItems: 'center',
@@ -135,17 +143,18 @@ iconrightHeader:{
 },
 iconleftHeader:{
   flex: 0.2,
-  paddingTop: 20,
+  paddingTop: 25,
   
  justifyContent: 'center',
  alignItems: 'center',
 },
 picIcon:{
 
-    height: 50,
-    width: 50,
+
+    height: 40,
+    width: 40,
     
-    borderRadius: 50/2,
+    borderRadius: 40/2,
 resizeMode: 'cover',
 },
 spaceHeader:{
@@ -164,7 +173,7 @@ avatarImage:{
    width: 90,
     height: 90,
     borderRadius: 180/2,
-    backgroundColor: '#999',
+
     justifyContent: 'center',
     alignItems: 'center',
 },
