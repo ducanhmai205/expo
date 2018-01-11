@@ -12,13 +12,15 @@ import {
 } from 'react-native';
 import {Constants, Permissions, Notifications} from 'expo';
 
-  const PUSH_ENDPOINT = 'https://test-expo.herokuapp.com/tokens';
+  const PUSH_ENDPOINT = 'http://35.185.68.16/api/v1/pushNotify/setDeviceToken';
 class WelcomeTrainee extends Component {
   constructor(props) {
     super(props);
   
     this.state = {
         accountId : `${this.props.navigation.state.params.Account.customer.id}`,
+        access_token: `${this.props.navigation.state.params.Account.customer.access_token}`,
+        type: `${this.props.navigation.state.params.Account.type}`,
        image: `${this.props.navigation.state.params.Account.avatar}`,
           receivedNotification: null,
           lastNotificationId: null,
@@ -50,14 +52,19 @@ componentDidMount() {
           }
 
           let token = await Notifications.getExpoPushTokenAsync();
-         console.log("ducah",token)
-          console.log("ducah",this.state.accountId)
-         this.guiTokenLenServerMinh(token);
+           let res = token.substring(18, 40);
+          console.log("ducanh token",token)
+   
+
+
+         this.guiTokenLenServerMinh(res);
       };
 
-      guiTokenLenServerMinh = async (token)=>{
+      guiTokenLenServerMinh = async (res)=>{
           // Gui Push token lên server của mình
-          // Thường là cần user_id và push_token
+         console.log("user",res)
+          console.log("user",this.state.type)
+          console.log("user",this.state.access_token)
           return fetch(PUSH_ENDPOINT, {
               method: 'POST',
               headers: {
@@ -65,9 +72,11 @@ componentDidMount() {
                   'Content-Type': 'application/json',
               },
               body: JSON.stringify({
-                  token: {
-                      value: token,
-                  },
+                
+                      device_token: res,
+                      id : this.state.accountId,
+                      access_token: this.state.access_token,
+                      type: this.state.type            
               }),
           });
       };

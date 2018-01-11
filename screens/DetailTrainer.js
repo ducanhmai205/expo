@@ -8,7 +8,9 @@ import {
   ImageBackground,
   Text,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -30,48 +32,14 @@ class DetailTrainer extends Component {
   pressIcon = () =>
   {
      this.setState({ pressIcon: !this.state.pressIcon });
-     console.log("testtrainer",this.props.navigation.state.params.Account)
+   
   }
   onStarRatingPress(rating) {
     this.setState({
       starCount: rating
     });
   }
-//   componentWillMount() {
-//   let formdata = new FormData();
-//   formdata.append("access_token", this.state.access_token);
-//   formdata.append("type", this.state.type);
-//   formdata.append("id", this.state.id);
 
-// //   console.log('id2',this.props.navigation.state.params.Account.customer.id)
-// //   console.log('token2',this.props.navigation.state.params.Account.customer.access_token)
-//   fetch('http://35.185.68.16/api/v1/trainer/getPRDetail', {
-//     method: 'post',
-//     headers: {
-//       'Content-Type': 'multipart/form-data',
-//     },
-//     body: formdata
-
-//   }).then((response) => response.json())
-//   .then((responseJson) => {
-
-    
-
-
-//     var content = responseJson.data.pr_content;
-//   console.log('content',content)
-    
-//     this.setState({
-     
-//   content : content
- 
-//     })
-   
-  
-//    })
-
-
-// }
 componentWillMount() {
 
 
@@ -92,12 +60,9 @@ componentWillMount() {
   }).then((response) => response.json())
   .then((responseJson) => {
    
-    
-
-
     var content = responseJson;
 
-     console.log("issue",content)
+     
     this.setState({
      
   content : content,
@@ -105,14 +70,26 @@ componentWillMount() {
   name: content.data.name,
   issue: content.rawSpecializes,
   prContent: content.data.pr_content,
-
+  rating: content.rating,
+  relation_status: content.relation_status
     })
-   console.log("issue",this.state.image)
+
   
    })
 
 
 }
+ renderColor(relationStatus){
+  //check pending
+    if(relationStatus === "connected"){
+
+      return '#00E6BE';
+    }else{
+   
+      return  '#DBDBDB';
+    }
+
+  }
   render() {
     const { navigate } = this.props.navigation;
     const {goBack} = this.props.navigation;
@@ -123,7 +100,8 @@ componentWillMount() {
                  <View style={styles.container}>
                   <View style={styles.header}>
                       <View style={styles.icon}>
-                      <TouchableOpacity style={{flex: 1,justifyContent: 'center',}}onPress={ () => goBack(null)  }>
+                      <TouchableOpacity style={{flex: 1,justifyContent: 'center',}} onPress={()=> {
+        navigate('SelectTrainer',{ Account: this.props.navigation.state.params.Account  });}}>
                           <Ionicons name="ios-arrow-back" size={20} />
                       </TouchableOpacity>
                       </View>
@@ -151,64 +129,35 @@ componentWillMount() {
                                      <Text style={{fontSize:11,paddingTop:5}}> {this.state.issue} </Text>
                                     </View>
 
-                                    <View style={styles.ratingcontent}>
-                                          <View style={{flex: 1,flexDirection: 'row',paddingTop:10}}>
-                                              <Text style={styles.textStar}> フレンドリー </Text>
-                                                    <View style={{paddingLeft: 8,}} >
-                                                      <StarRating
-
-                                                        disabled={false}
+                                    <TouchableOpacity style={styles.ratingcontent} onPress={ ()=> {
+                navigate('RatingScreen',{ Account: this.props.navigation.state.params.Account ,id: this.state.trainerId,name: this.state.name,issue:this.state.issue,rating: this.state.rating });}} >
+                                          <FlatList
+                                              data={this.state.rating}
+                                              horizontal={false}
+                                    
+                                               keyExtractor = {(item, index) => index}
+                                              renderItem={({item}) => 
+                                              <View style={{flexDirection: 'row' ,justifyContent:  'space-between'    }}>
+                                                <Text style={{fontSize: 13}}> {item.title} </Text>
+                                                 <StarRating
+                                                        style={{justifyContent: 'flex-end'  }}
+                                                        disabled={true}
                                                         emptyStar={'ios-star-outline'}
                                                         fullStar={'ios-star'}
                                                         halfStar={'ios-star-half'}
                                                         iconSet={'Ionicons'}
                                                         maxStars={5}
-                                                        starSize={15}
+                                                        starSize={12}
                                                         starColor={'green'}
-                                                        rating={this.state.starCount}
+                                                        rating={item.value}
                                                         selectedStar={(rating) => this.onStarRatingPress(rating)}
                                                         
                                                        />
-                                                    </View>
-                                              </View>
-                                              <View style={{flex: 1,flexDirection: 'row'}}>
-
-                                              <Text  style={styles.textStar}> 減量 </Text>
-                                                <View style={{paddingLeft: 60,}} >
-                                              <StarRating
-                                                        disabled={false}
-                                                        emptyStar={'ios-star-outline'}
-                                                        fullStar={'ios-star'}
-                                                        halfStar={'ios-star-half'}
-                                                        iconSet={'Ionicons'}
-                                                        maxStars={5}
-                                                        starSize={15}
-                                                        starColor={'green'}
-                                                        rating={this.state.starCount}
-                                                        selectedStar={(rating) => this.onStarRatingPress(rating)}
-
-                                                      />
-                                                      </View>
-                                              </View>
-                                              <View style={{flex: 1,flexDirection: 'row'}}>
-                                              <Text  style={styles.textStar}> 痛みを取る </Text>
-                                              <View style={{paddingLeft: 15,}} >
-                                              <StarRating
-                                                        disabled={false}
-                                                        emptyStar={'ios-star-outline'}
-                                                        fullStar={'ios-star'}
-                                                        halfStar={'ios-star-half'}
-                                                        iconSet={'Ionicons'}
-                                                        maxStars={5}
-                                                        starSize={15}
-                                                        starColor={'green'}
-                                                        rating={this.state.starCount}
-                                                        selectedStar={(rating) => this.onStarRatingPress(rating)}
-
-                                                      />
-                                                      </View>
-                                              </View>
-                                    </View>
+                                                 <Text style={{fontSize: 10}}> {item.value} </Text>
+                                              </View>                                                        
+                                            }
+                                            />
+                                    </TouchableOpacity>
                                  </View>
                                   <View
                                     style={{
@@ -219,15 +168,20 @@ componentWillMount() {
                                   />
 
                                  <View style={styles.infocontent}>
-                                    <View style={{flex: 2,}}>
+                                    <View style={{flex: 1.8,marginBottom: 15,}}>
+                                    <ScrollView>
                                         <Text style={{fontSize:13}}> {this.state.prContent}</Text>
+                                        </ScrollView>
                                     </View>
 
                                     <View style={{flex: 1,justifyContent: 'center',alignItems: 'center',}}>
-                                         <View style={styles.circle}>
-                                         <TouchableOpacity   onPress = { this.pressIcon }>
-                                           <Icon name="handshake-o" size={25} color={( this.state.pressIcon ) ? 'green':'red'} />
+                                              <View style={styles.circleOutside}>
+                                                <View style={styles.circleInside}>
+                                         <TouchableOpacity   onPress={ ()=> {
+        navigate('ChatUser',{Account: this.props.navigation.state.params.Account ,trainerId: this.state.trainerId});}}>
+                                           <Icon name="handshake-o" size={25} color={this.renderColor(this.state.relation_status)} />
                                           </TouchableOpacity>
+                                         </View>
                                          </View>
                                      </View>
 
@@ -337,6 +291,7 @@ flex: 1.2,
 },
 ratingcontent:{
   flex: 2,
+  paddingTop: 10,
  paddingRight: 15,
 
 },
@@ -345,17 +300,27 @@ textStart:{
 },
 infocontent:{
 flex: 1.7,
-paddingTop: 15
+paddingTop: 15,
+
 },
-circle: {
+ circleOutside: {
+
     width: 50,
     height: 50,
-    borderRadius: 100/2,
-    alignItems: 'center',
+    borderRadius: 50/2,
+    backgroundColor: '#DCDCDC',
     justifyContent: 'center',
-    borderColor: 'black',
-    overflow: 'hidden'
-}
+    alignItems: 'center',
+  },
+  circleInside:{
+    flex: 1,
+    width: 47,
+    height: 47,
+    borderRadius: 47/2,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
 });
 

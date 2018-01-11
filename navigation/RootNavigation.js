@@ -28,7 +28,12 @@ import UpdatePassTrainer from '../screens/UpdatePassTrainer';
 import UpdatePr from '../screens/UpdatePr';
 import ChangeIssue from '../screens/ChangeIssue';
 import ChangeSpecializes from '../screens/ChangeSpecializes';
-
+import RatingScreen from '../screens/RatingScreen';
+import ChatUser from '../screens/ChatUser';
+import ChatTrainer from '../screens/ChatTrainer';
+import InfomationVersionTrainer from '../screens/Infomation/InfomationVersionTrainer';
+import PolicyTrainer from '../screens/Infomation/PolicyTrainer';
+import TermTrainer from '../screens/Infomation/TermTrainer';
 const RootNavigation = StackNavigator(
 {	
   	TopScreen: { screen: TopScreen },
@@ -56,7 +61,12 @@ const RootNavigation = StackNavigator(
  	ChangeIssue : { screen: ChangeIssue},
  	ChangeSpecializes : { screen: ChangeSpecializes},
  	DetailUser : { screen: DetailUser},
-
+ 	RatingScreen : { screen: RatingScreen},
+ 	ChatUser : { screen: ChatUser},
+ 	ChatTrainer : { screen: ChatTrainer},
+ 	InfomationVersionTrainer : { screen: InfomationVersionTrainer},
+ 	PolicyTrainer : { screen: PolicyTrainer},
+ 	TermTrainer : { screen: TermTrainer},
  
  
 },

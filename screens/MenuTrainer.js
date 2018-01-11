@@ -20,7 +20,7 @@
       import ModalFilterPicker from 'react-native-modal-filter-picker'
 
       var options = [];
-      for (var i = 1; i <=8; i++) {
+      for (var i = 1; i <=100; i++) {
         options.push({
           key: i,
           label: i,
@@ -31,12 +31,12 @@
       class MenuTrainer extends Component {
         constructor(props) {
           super(props);
-          console.log("DucNT",options);
+          console.log("data khi truyen tu profile",this.props.navigation.state.params.max_customer_training);
           var pushStatus = `${this.props.navigation.state.params.Account.trainer.push_status}`;
           let defaultSwitch = this.getSwitchDefaultValue();
 
           this.state = {
-           picked:`${this.props.navigation.state.params.Account.trainer.max_customer_training}`,
+           picked:`${this.props.navigation.state.params.max_customer_training}`,
            value:'',
            image: `${this.props.navigation.state.params.Account.avatar}`,
            size:15,
@@ -152,14 +152,7 @@
       let name = this.state.name;
       let email = this.state.email;
 
-      console.log("token ducanh",this.props.navigation.state.params.Account.trainer.access_token);
-      console.log("type ducanh",this.props.navigation.state.params.Account.type);
-      console.log("id ducanh",this.props.navigation.state.params.Account.trainer.id);
-      console.log("email ducanh",email);
-      console.log("push_status ducanh",push);
-      console.log("max_customer_training ducanh",training);
-      console.log("name ducanh",name);
-      console.log("avatar ducanh",{uri: this.state.image, name: 'selfie.jpg', type: 'image/jpg'});
+    
 
       formdata.append("access_token", this.props.navigation.state.params.Account.trainer.access_token);
       formdata.append("type", this.props.navigation.state.params.Account.type);
@@ -169,7 +162,7 @@
       formdata.append("max_customer_training", training);
       formdata.append("name",  name);
       formdata.append('avatar', {uri: this.state.image, name: 'selfie.jpg', type: 'image/jpg'});
-
+console.log("ducanh",formdata);
 
       fetch('http://35.185.68.16/api/v1/trainer/updateProfile', {
 
@@ -332,7 +325,7 @@
       <View style={styles.circle}>
 
       {image &&
-        <Image source={{ uri: this.state.image }} style={{ flex:1,width: 70, height: 70,borderRadius: 70/2, }} resizeMode="stretch" />}
+        <Image source={{ uri: this.state.image }} style={{ flex:1,width: 80, height: 80,borderRadius: 80/2, }} resizeMode="stretch" />}
         </View>
         </TouchableOpacity>
         <View style={styles.header}>
@@ -405,7 +398,7 @@
         </View>
         </TouchableOpacity>
         <TouchableOpacity style={{flex: 1,}}  onPress={()=> {
-          navigate('ChangeSpecializes',{ Account: this.props.navigation.state.params.Account  });}}>
+          navigate('ChangeSpecializes',{ Account: this.props.navigation.state.params.Account,max_customer_training: this.state.picked});}}>
           <View style={styles.optionVersion}>
           <Text style={styles.textOption}> 得意分野 </Text>
           <Text style={styles.textOption}> {this.state.issue} </Text>
@@ -431,27 +424,27 @@
             </View>
             <View style={styles.bottomSelect}>
 
-            <TouchableOpacity style={{flex: 1,}} onPress={ ()=> {navigate('InfomationVersion')}}>
+            <TouchableOpacity style={{flex: 1,}} onPress={ ()=> {navigate('InfomationVersionTrainer',{Account: this.props.navigation.state.params.Account})}}>
             <View style={styles.option}>
             <Text style={styles.textOption}> バージョン情報 </Text>
             <MaterialIcons name="keyboard-arrow-right" size={13} color='#432C71' />
 
             </View>
             </TouchableOpacity>
-            <TouchableOpacity style={{flex: 1,}} onPress={ ()=> {navigate('Policy')}}>
+            <TouchableOpacity style={{flex: 1,}} onPress={ ()=> {navigate('PolicyTrainer',{Account: this.props.navigation.state.params.Account})}}>
             <View style={styles.option}>
             <Text style={styles.textOption}> 使用規約 </Text>
             <MaterialIcons name="keyboard-arrow-right" size={13} color='#432C71' />
             </View>
             </TouchableOpacity>
-            <TouchableOpacity style={{flex: 1,}}  onPress={ ()=> {navigate('Term')}}>
+            <TouchableOpacity style={{flex: 1,}}  onPress={ ()=> {navigate('TermTrainer',{Account: this.props.navigation.state.params.Account})}}>
             <View style={styles.option}>
             <Text style={styles.textOption}> プライバシーポリシー </Text>
             <MaterialIcons name="keyboard-arrow-right" size={13} color='#432C71' />
             </View>
             </TouchableOpacity>
             <View style={styles.option}>
-            <Text style={styles.textOption}> バージョン情報 </Text>
+            <Text style={styles.textOption}> お問い合わせ </Text>
             <MaterialIcons name="keyboard-arrow-right" size={13} color='#432C71' />
             </View>
             <TouchableOpacity style={{flex: 1,}} onPress={this.confirm}>

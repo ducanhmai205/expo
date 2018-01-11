@@ -26,10 +26,12 @@
       this.state = {
         hidePassword: true,
         UserEmail: '',
-        UserPassword: ''
+        UserPassword: '',
+        Data:''
       }
       navigation = this.props.navigation;
     }
+
 
   onNavigate(data){
         console.log('name',data);
@@ -54,6 +56,7 @@
     }
 
   UserLoginFunction = () =>{
+    console.log("device",this.state.Data)
    fetch('http://35.185.68.16/api/v1/customer/login', {
     method: 'POST',
     headers: {
@@ -62,9 +65,9 @@
     },
     body: JSON.stringify({
    
-      email: this.state.UserEmail,
+      email: this.state.UserEmail ,
    
-      password: this.state.UserPassword
+      password: 12345678
    
     })
    
@@ -88,6 +91,7 @@
              if(typeof(responseJson.message) === 'string'){
                    
                      Alert.alert(responseJson.message);
+                       console.log('2',responseJson.message)
              }
               else{
                 var error_messEmail = '';
@@ -149,22 +153,29 @@
 
                           <View style={styles.nameInput}>
                               <TextInput
+                                    ref='Email'
                                     style={{flex: 1,paddingLeft: 40}}
                                     underlineColorAndroid='transparent'
+                                    returnKeyType = {"next"}                                 
                                     placeholder="E-mail"
                                     autoCapitalize="none"
                                     placeholderTextColor = "#47E5B3"
                                     onChangeText={UserEmail => this.setState({UserEmail})}
-                                    keybroadType="email-address"
+                                    keyboardType= 'email-address'
+                                    onSubmitEditing={(event) => { 
+                                      this.refs.Password.focus(); 
+                                    }}
                               />
                           </View>
 
                           <View style={styles.passwordInput}>
                               <TextInput
+                                    ref='Password'
                                     style={{flex: 1,paddingLeft: 40}}
                                     placeholderTextColor = "#47E5B3"
                                     underlineColorAndroid='transparent'
-                                    placeholder="Password"
+                                    placeholder="Password"                               
+                                    returnKeyType = {"done"}
                                     autoCapitalize="none"
                                     onChangeText={UserPassword => this.setState({UserPassword})}
                                     secureTextEntry = { this.state.hidePassword }
@@ -259,6 +270,7 @@
   nameInput:{
   flex: 0.6,
   paddingLeft:25,
+  paddingRight:30
 
   },
   passwordInput:{
